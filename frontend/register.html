@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <h1>🏥 Sistema de Turnos Médicos</h1>
+
+    <h3>Crear cuenta</h3>
+
+    <form id="registerForm">
+
+        <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre"
+            required>
+
+        <input
+            type="text"
+            id="apellido"
+            placeholder="Apellido"
+            required>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Correo electrónico"
+            required>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+            required>
+
+        <button type="submit">
+
+            Registrarse
+
+        </button>
+
+    </form>
+
+    <p id="mensaje"></p>
+
+    <div class="separador"></div>
+
+    <p class="texto">
+
+        ¿Ya tienes una cuenta?
+
+    </p>
+
+    <a href="login.html">
+
+        <button class="btn-register" type="button">
+
+            Iniciar sesión
+
+        </button>
+
+    </a>
+
+</div>
+
+<script src="js/register.js"></script>
+
+</body>
+
+</html>
