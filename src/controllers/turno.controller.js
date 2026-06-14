@@ -3,29 +3,40 @@ const Turno = require("../models/turno.model");
 // 🟢 CREAR TURNO
 const crearTurno = async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("USER:", req.user);
+
     const turno = new Turno({
-      ...req.body,
+      paciente: req.body.paciente,
+      profesionalId: req.body.profesionalId,
+      especialidad: req.body.especialidad,
+      fecha: req.body.fecha,
+      hora: req.body.hora,
+      estado: "pendiente",
       userId: req.user.id
     });
 
     await turno.save();
 
-    res.json({
+    res.status(201).json({
       message: "Turno creado",
       turno
     });
 
   } catch (error) {
+    console.log("ERROR CREAR TURNO:", error);
     res.status(500).json({
-      message: "Error al crear turno"
+      message: error.message
     });
   }
 };
 
-// 🟢 LISTAR TURNOS
+// 🟢 LISTAR TURNOS (ADMIN VE TODO / PACIENTE SOLO LOS SUYOS)
 const listarTurnos = async (req, res) => {
   try {
     let turnos;
+
+    console.log("USER LOGUEADO:", req.user);
 
     if (req.user.rol === "admin") {
       turnos = await Turno.find();
@@ -36,13 +47,14 @@ const listarTurnos = async (req, res) => {
     res.json(turnos);
 
   } catch (error) {
+    console.log("ERROR LISTAR TURNOS:", error);
     res.status(500).json({
-      message: "Error al listar turnos"
+      message: error.message
     });
   }
 };
 
-// 🟢 CAMBIAR ESTADO
+// 🟢 CAMBIAR ESTADO DE TURNO
 const cambiarEstadoTurno = async (req, res) => {
   try {
     const { id } = req.params;
@@ -68,13 +80,14 @@ const cambiarEstadoTurno = async (req, res) => {
     });
 
   } catch (error) {
+    console.log("ERROR CAMBIAR ESTADO:", error);
     res.status(500).json({
-      message: "Error al cambiar estado"
+      message: error.message
     });
   }
 };
 
-// 🔥 EXPORT CORRECTO (TODO JUNTO)
+// 🔥 EXPORT FINAL
 module.exports = {
   crearTurno,
   listarTurnos,

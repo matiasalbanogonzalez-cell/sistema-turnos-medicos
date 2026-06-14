@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Turno</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 500px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input, button {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #2c7be5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1a5fd0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Sacar turno</h2>
+
+<label for="especialidad">Especialidad</label>
+<select id="especialidad"></select>
+
+<label for="profesional">Profesional</label>
+<select id="profesional"></select>
+
+<label for="fecha">Fecha</label>
+<input type="date" id="fecha">
+
+<label for="hora">Hora</label>
+<input type="time" id="hora">
+
+<button id="guardar">Reservar turno</button>
+
+<script src="js/nuevo-turno.js"></script>
+
+</body>
+</html>

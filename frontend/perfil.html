@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 700px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .turno {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Mi Perfil</h2>
+
+<div class="card">
+    <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Rol:</strong> <span id="rol"></span></p>
+</div>
+
+<h3>Mis turnos</h3>
+
+<div id="turnos"></div>
+
+<button onclick="logout()">Cerrar sesión</button>
+
+<script src="js/perfil.js"></script>
+
+</body>
+</html>

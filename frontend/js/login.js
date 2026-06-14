@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
     } catch (error) {
 
         document.getElementById("mensaje").innerText =
-            "Error al conectar con el servidor";
+            "Error al conectar con el servidor.";
 
     }
 
