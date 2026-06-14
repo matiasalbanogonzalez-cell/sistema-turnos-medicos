@@ -15,6 +15,27 @@ const profesionales = [
     especialidad: "Pediatría",
     matricula: "98765",
     consultorio: "5"
+  },
+  {
+    id: 3,
+    nombre: "Dra Malena Gonzalez",
+    especialidad: "Cardiología",
+    matricula: "12345",
+    consultorio: "2"
+  },
+  {
+    id: 4,
+    nombre: "Dr. Juan Pérez",
+    especialidad: "Neurología",
+    matricula: "54321",
+    consultorio: "3"
+  },
+  {
+    id: 5,
+    nombre: "Dr. Matias Pérez",
+    especialidad: "Neurología",
+    matricula: "54321",
+    consultorio: "4"
   }
 ];
 
@@ -23,7 +44,7 @@ router.get("/", (req, res) => {
   res.json(profesionales);
 });
 
-// 👇 CREAR NUEVO PROFESIONAL (ESTO TE FALTABA)
+// 👇 CREAR NUEVO PROFESIONAL
 router.post("/", (req, res) => {
   const nuevo = {
     id: profesionales.length + 1,

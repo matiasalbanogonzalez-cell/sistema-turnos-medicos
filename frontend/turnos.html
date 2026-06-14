@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profesionales - Sistema de Turnos Médicos</title>
+    <title>Mis Turnos - Sistema de Turnos Médicos</title>
 
     <link rel="stylesheet" href="css/styles.css">
 
@@ -101,13 +101,7 @@
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
 
-            <h2>Listado de Profesionales</h2>
-
-            <button id="btnNuevo">
-
-                ➕ Agregar Profesional
-
-            </button>
+            <h2>Mis turnos</h2>
 
         </div>
 
@@ -117,21 +111,21 @@
 
                 <tr>
 
-                    <th>Nombre</th>
+                    <th>Paciente</th>
 
                     <th>Especialidad</th>
 
-                    <th>Matrícula</th>
+                    <th>Fecha</th>
 
-                    <th>Consultorio</th>
+                    <th>Hora</th>
 
-                    <th>Acciones</th>
+                    <th>Estado</th>
 
                 </tr>
 
             </thead>
 
-            <tbody id="tablaProfesionales">
+            <tbody id="tablaTurnos">
 
             </tbody>
 
@@ -141,99 +135,7 @@
 
 </div>
 
-<script>
-
-const profesionales = [
-
-    {
-
-        nombre:"Dr. Carlos Gómez",
-
-        especialidad:"Clínica Médica",
-
-        matricula:"12345",
-
-        consultorio:"2"
-
-    },
-
-    {
-
-        nombre:"Dra. Laura Ruiz",
-
-        especialidad:"Pediatría",
-
-        matricula:"98765",
-
-        consultorio:"5"
-
-    },
-
-    {
-
-        nombre:"Dr. Martín López",
-
-        especialidad:"Cardiología",
-
-        matricula:"45678",
-
-        consultorio:"8"
-
-    }
-
-];
-
-const tabla = document.getElementById("tablaProfesionales");
-
-profesionales.forEach(p=>{
-
-tabla.innerHTML+=`
-
-<tr>
-
-<td>${p.nombre}</td>
-
-<td>${p.especialidad}</td>
-
-<td>${p.matricula}</td>
-
-<td>${p.consultorio}</td>
-
-<td>
-
-<button>✏️</button>
-
-<button>🗑️</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-const usuario=JSON.parse(localStorage.getItem("user"));
-
-if(usuario){
-
-document.getElementById("nombreUsuario").innerText=
-
-usuario.nombre+" "+usuario.apellido;
-
-}
-
-function logout(){
-
-localStorage.removeItem("token");
-
-localStorage.removeItem("user");
-
-window.location.href="login.html";
-
-}
-
-</script>
+<script src="js/app.js"></script>
 
 </body>
 

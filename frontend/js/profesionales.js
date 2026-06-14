@@ -1,6 +1,23 @@
+const API = "http://localhost:3000/api";
+const token = localStorage.getItem("token");
+const usuario = JSON.parse(localStorage.getItem("user") || "null");
+
+if (!token || !usuario) {
+  window.location.href = "login.html";
+}
+
 async function cargarProfesionales() {
   try {
-    const res = await fetch("http://localhost:3000/api/profesionales");
+    const res = await fetch(`${API}/profesionales`, {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error("No se pudieron cargar profesionales");
+    }
+
     const data = await res.json();
 
     const tabla = document.getElementById("tablaProfesionales");
@@ -38,12 +55,9 @@ function eliminar(id) {
 // cargar al abrir la página
 cargarProfesionales();
 
-// usuario
-const usuario = JSON.parse(localStorage.getItem("user"));
-
 if (usuario) {
   document.getElementById("nombreUsuario").innerText =
-    usuario.nombre + " " + usuario.apellido;
+    `${usuario.nombre || ""} ${usuario.apellido || ""}`.trim();
 }
 
 // logout

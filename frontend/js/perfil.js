@@ -1,50 +1,60 @@
 const API = "http://localhost:3000/api";
 const token = localStorage.getItem("token");
+const storedUser = JSON.parse(localStorage.getItem("user") || "null");
 
-// Decodificar token simple (sin librerías)
-function parseJwt(token) {
-    if (!token) return null;
-    return JSON.parse(atob(token.split(".")[1]));
+if (!token || !storedUser) {
+    window.location.href = "login.html";
 }
 
 function cargarPerfil() {
-    const data = parseJwt(token);
-
-    if (!data) return;
-
-    document.getElementById("nombre").textContent = data.email;
-    document.getElementById("email").textContent = data.email;
-    document.getElementById("rol").textContent = data.role || data.rol;
+    document.getElementById("nombre").textContent = storedUser.nombre || "";
+    document.getElementById("email").textContent = storedUser.email || "";
+    document.getElementById("rol").textContent = storedUser.rol || storedUser.role || "";
 }
 
 async function cargarTurnos() {
-    const res = await fetch(`${API}/turnos`, {
-        headers: {
-            "Authorization": "Bearer " + token
+    try {
+        const res = await fetch(`${API}/turnos`, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error("No se pudieron cargar los turnos");
         }
-    });
 
-    const turnos = await res.json();
+        const turnos = await res.json();
 
-    const container = document.getElementById("turnos");
-    container.innerHTML = "";
+        const container = document.getElementById("turnos");
+        container.innerHTML = "";
 
-    turnos.forEach(t => {
-        const div = document.createElement("div");
-        div.className = "turno";
+        if (!turnos.length) {
+            container.innerHTML = "<p>No tienes turnos aún.</p>";
+            return;
+        }
 
-        div.innerHTML = `
-            <p><strong>Fecha:</strong> ${t.fecha}</p>
-            <p><strong>Hora:</strong> ${t.hora}</p>
-            <p><strong>Estado:</strong> ${t.estado || "pendiente"}</p>
-        `;
+        turnos.forEach(t => {
+            const div = document.createElement("div");
+            div.className = "turno";
 
-        container.appendChild(div);
-    });
+            div.innerHTML = `
+                <p><strong>Fecha:</strong> ${t.fecha}</p>
+                <p><strong>Hora:</strong> ${t.hora}</p>
+                <p><strong>Estado:</strong> ${t.estado || "pendiente"}</p>
+            `;
+
+            container.appendChild(div);
+        });
+    } catch (error) {
+        const container = document.getElementById("turnos");
+        container.innerHTML = `<p>${error.message}</p>`;
+    }
 }
 
 function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location.href = "login.html";
 }
 

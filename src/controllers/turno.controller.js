@@ -6,12 +6,20 @@ const crearTurno = async (req, res) => {
     console.log("BODY:", req.body);
     console.log("USER:", req.user);
 
+    const { paciente, profesionalId, especialidad, fecha, hora } = req.body;
+
+    if (!paciente || !profesionalId || !especialidad || !fecha || !hora) {
+      return res.status(400).json({
+        message: "Faltan campos requeridos: paciente, profesionalId, especialidad, fecha, hora"
+      });
+    }
+
     const turno = new Turno({
-      paciente: req.body.paciente,
-      profesionalId: req.body.profesionalId,
-      especialidad: req.body.especialidad,
-      fecha: req.body.fecha,
-      hora: req.body.hora,
+      paciente,
+      profesionalId,
+      especialidad,
+      fecha,
+      hora,
       estado: "pendiente",
       userId: req.user.id
     });

@@ -1,3 +1,4 @@
+const env = require("../config/env");
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
@@ -22,7 +23,7 @@ const authMiddleware = (req, res, next) => {
 
     console.log("Token:", token);
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, env.JWT_SECRET);
 
     console.log("Usuario decodificado:", decoded);
 
