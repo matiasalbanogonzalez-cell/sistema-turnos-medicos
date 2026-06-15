@@ -57,7 +57,7 @@ async function cargarDashboard() {
                 return;
             }
 
-            turnos.slice(-5).reverse().forEach(t => {
+            turnos.reverse().forEach(t => {
                 tabla.innerHTML += `
                     <tr>
                         <td>${t.paciente}</td>
