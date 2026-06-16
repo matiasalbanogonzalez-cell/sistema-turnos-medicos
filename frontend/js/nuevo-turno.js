@@ -99,19 +99,21 @@ especialidadSelect.addEventListener("change", filtrarProfesionalesPorEspecialida
 document.getElementById("guardar").addEventListener("click", async () => {
     const fecha = document.getElementById("fecha").value;
     const hora = document.getElementById("hora").value;
+    const obraSocial = document.getElementById("obraSocial").value;
 
-    if (!fecha || !hora || !profesionalSelect.value) {
+   if (!fecha || !hora || !profesionalSelect.value || !obraSocial) {
         alert("Completa todos los campos antes de guardar el turno.");
         return;
     }
 
     const turno = {
-        paciente: obtenerPaciente(),
-        profesionalId: profesionalSelect.value,
-        especialidad: profesionalSelect.selectedOptions[0]?.dataset.especialidad || "",
-        fecha,
-        hora
-    };
+    paciente: obtenerPaciente(),
+    profesionalId: profesionalSelect.value,
+    especialidad: profesionalSelect.selectedOptions[0]?.dataset.especialidad || "",
+    fecha,
+    hora,
+    obraSocial
+};
 
     const res = await fetch(`${API}/turnos`, {
         method: "POST",

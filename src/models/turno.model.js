@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const turnoSchema = new mongoose.Schema({
@@ -32,12 +33,20 @@ const turnoSchema = new mongoose.Schema({
     default: "pendiente"
   },
 
+  obraSocial: {
+    type: String,
+    required: true,
+    enum: ["OSDE", "Swiss Medical", "Galeno", "Particular"]
+  },
+
   userId: {
     type: String,
     required: true
   }
+
 }, {
   timestamps: true
 });
 
 module.exports = mongoose.model("Turno", turnoSchema);
+

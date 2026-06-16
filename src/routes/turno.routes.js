@@ -4,13 +4,13 @@ const router = express.Router();
 const turnoController = require("../controllers/turno.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
-// � LISTAR TURNOS (admin ve todo, paciente solo los suyos)
+// Listar turnos
 router.get("/", authMiddleware, turnoController.listarTurnos);
 
-// 🔐 CREAR TURNO
+// Crear turno
 router.post("/", authMiddleware, turnoController.crearTurno);
 
-// 🔐 CAMBIAR ESTADO
+// Cambiar estado
 router.put("/:id", authMiddleware, turnoController.cambiarEstadoTurno);
 
 module.exports = router;
